@@ -5,10 +5,9 @@ from kivy.uix.camera import Camera
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 import time
-import os
 
 class Pixel11ProCamera(BoxLayout):
-    def __init__(self, **kwargs):
+    def __init__(self, **kw):
         super().__init__()
         self.orientation = 'vertical'
 
@@ -17,3 +16,11 @@ class Pixel11ProCamera(BoxLayout):
             size_hint=(1, 0.1)
         )
         self.add_widget(self.info)
+
+        self.cam = Camera(
+            play=True,
+            index=0
+        )
+        self.add_widget(self.cam)
+
+        row =
