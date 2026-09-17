@@ -1,4 +1,3 @@
-
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.camera import Camera
@@ -13,12 +12,9 @@ class Pixel11ProCamera(BoxLayout):
         
         # Top Bar - S26 Ultra Style
         self.info = Label(
-            text="Pixel 11 Pro | 4K 60FPS | AI HDR+ ON | 200MP",
+            text="Pixel 11 Pro | 4K 60FPS | AI HDR+ ON",
             size_hint=(1, 0.1),
-            font_size='14sp'
+            font_size='16sp'
         )
         self.add_widget(self.info)
-
-        # Main 4K Camera
-        self.cam = Camera(play=True, resolution=(1920, 1080), index=0)
        
