@@ -3,7 +3,7 @@ name: Build APK
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -13,10 +13,19 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
-      - run: pip install buildozer cython==0.29.33
-      - run: sudo apt-get update && sudo apt-get install -y zip unzip
-      - run: buildozer -v android debug
-      - uses: actions/upload-artifact@v4
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install buildozer cython==0.29.33
+          sudo apt-get update
+          sudo apt-get install -y zip unzip openjdk-17-jdk
+      - name: Accept licenses
+        run: |
+          yes | sdkmanager --licenses || true
+      - name: Build APK
+        run: buildozer -v android debug
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
           name: Pixel11-Pro-APK
           path: bin/*.apk
