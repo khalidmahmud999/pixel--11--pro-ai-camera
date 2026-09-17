@@ -5,13 +5,21 @@ package.domain = com.pixel11pro.camera
 source.dir =.
 source.include_exts = py,png,jpg,kv,atlas
 version = 1.0
-requirements = python3,kivy
+requirements = python3,kivy,Pillow
 orientation = portrait
 fullscreen = 0
-android.permissions = CAMERA,RECORD_AUDIO,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
+android.permissions = CAMERA,RECORD_AUDIO,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE,INTERNET
 android.api = 33
 android.minapi = 21
+android.sdk = 33
+android.ndk = 25b
+android.build_tools_version = 33.0.2
 android.accept_sdk_license_agreements = True
 
 [buildozer]
 log_level = 2
+warn_on_root = 1
+
+# (important) - develop branch use করলে Build-Tools 37 এর bug থাকে না
+[app]
+p4a.branch = develop
