@@ -1,4 +1,5 @@
-  from kivy.app import App
+
+from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.camera import Camera
 from kivy.uix.button import Button
@@ -10,6 +11,9 @@ class Pixel11ProCamera(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__()
         self.orientation = 'vertical'
-        
+
         self.info = Label(
-            text='Pixel 11 Pro | 4K 60FPS | AI',
+            text='Pixel 11 Pro | 4K 60FPS',
+            size_hint=(1, 0.1)
+        )
+        self.add_widget(self.info)
