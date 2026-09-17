@@ -1,3 +1,4 @@
+
 from kivy.app import App
 from kivy.uix.boxlayout \
 import BoxLayout
@@ -16,6 +17,4 @@ class Cam(BoxLayout):
   'vertical'
   self.t=Label(
    text='Pixel 11 Pro',
-   size_hint=(1,.1)
-  )
-  self.add_widget(self
+  
