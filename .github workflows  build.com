@@ -1,0 +1,21 @@
+name: Build APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - run: pip install buildozer cython==0.29.33
+      - run: sudo apt-get update && sudo apt-get install -y zip unzip
+      - run: buildozer -v android debug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Pixel11-Pro-APK
+          path: bin/*.apk
