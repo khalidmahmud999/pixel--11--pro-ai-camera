@@ -1,3 +1,4 @@
+
 name: Build APK
 on: [push]
 jobs:
@@ -21,9 +22,11 @@ jobs:
         run: |
           export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
           yes | sdkmanager --licenses || true
-          sdkmanager "build-tools;33.0.2" "platforms;android-33" "platform-tools"
+          sdkmanager "build-tools;37.0.0" "platforms;android-33" "platform-tools"
       - name: Build APK
         run: |
+          mkdir -p ~/.android/licenses
+          cp $ANDROID_HOME/licenses/* ~/.android/licenses/ || true
           buildozer -v android debug
       - name: Upload APK
         uses: actions/upload-artifact@v4
