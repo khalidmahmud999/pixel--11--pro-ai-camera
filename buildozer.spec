@@ -1,3 +1,4 @@
+
 [app]
 title = Pixel 11 Pro AI Camera
 package.name = pixel11procamera
@@ -13,13 +14,9 @@ android.api = 33
 android.minapi = 21
 android.sdk = 33
 android.ndk = 25b
-android.build_tools_version = 33.0.2
 android.accept_sdk_license_agreements = True
+p4a.branch = develop
 
 [buildozer]
 log_level = 2
 warn_on_root = 1
-
-# (important) - develop branch use করলে Build-Tools 37 এর bug থাকে না
-[app]
-p4a.branch = develop
