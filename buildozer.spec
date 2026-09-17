@@ -11,7 +11,7 @@ fullscreen = 0
 android.permissions = CAMERA,RECORD_AUDIO,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
 android.api = 33
 android.minapi = 21
-android.accept_sdk_license_agreement = True
+android.accept_sdk_license_agreements = True
 
 [buildozer]
 log_level = 2
