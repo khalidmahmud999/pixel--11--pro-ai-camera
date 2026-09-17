@@ -1,3 +1,4 @@
+
 name: Build APK
 on: [push]
 jobs:
@@ -12,21 +13,29 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
-      - name: Install deps
+      - name: Install tools
         run: |
           pip install buildozer cython==0.29.33
-          sudo apt update
           sudo apt install -y zip unzip
-      - name: Build APK
+      - name: Accept licenses
         run: |
-          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-          yes | sdkmanager --licenses || true
-          sdkmanager "build-tools;33.0.1" "platforms;android-33"
           mkdir -p ~/.android/licenses
-          echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > ~/.android/licenses/android-sdk-license
-          buildozer -v android debug
+          mkdir -p ~/.buildozer/android/platform/android-sdk/licenses
+          mkdir -p $ANDROID_HOME/licenses
+          printf "8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b6825ea9c5514f83c1059b8ea6b9d\n" > ~/.android/licenses/android-sdk-license
+          cp ~/.android/licenses/android-sdk-license $ANDROID_HOME/licenses/
+          cp ~/.android/licenses/android-sdk-license ~/.buildozer/android/platform/android-sdk/licenses/
+          yes | sdkmanager --licenses || true
+      - name: Install SDK
+        run: |
+          sdkmanager "build-tools;33.0.1" "build-tools;37.0.0" "platforms;android-33"
+          mkdir -p ~/.buildozer/android/platform/android-sdk/build-tools
+          cp -r $ANDROID_HOME/build-tools/33.0.1 ~/.buildozer/android/platform/android-sdk/build-tools/ 2>/dev/null || true
+          cp -r $ANDROID_HOME/build-tools/37.0.0 ~/.buildozer/android/platform/android-sdk/build-tools/ 2>/dev/null || true
+      - name: Build APK
+        run: buildozer -v android debug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Pixel11-APK
+          name: Camera-APK
           path: bin/*.apk
