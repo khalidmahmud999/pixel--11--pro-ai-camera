@@ -16,7 +16,11 @@ jobs:
         run: |
           pip install buildozer cython==0.29.33
           sudo apt-get update
-          sudo apt-get install -y zip unzip
+          sudo apt-get install -y zip unzip libffi-dev libssl-dev
+      - name: Accept Android Licenses
+        run: |
+          yes | sdkmanager --licenses || true
+          sdkmanager "build-tools;33.0.2" "platforms;android-33" "platform-tools"
       - name: Build APK
         run: |
           buildozer -v android debug
