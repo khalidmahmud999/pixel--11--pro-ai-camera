@@ -1,0 +1,21 @@
+name: Build Camera APK
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - run: |
+          pip install buildozer
+          sudo apt-get update
+          sudo apt-get install -y openjdk-17-jdk zip unzip
+      - run: buildozer -v android debug
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Camera-APK
+          path: bin/*.apk
