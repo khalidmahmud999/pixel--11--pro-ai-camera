@@ -13,14 +13,4 @@ class Pixel11ProCamera(BoxLayout):
 
         self.info = Label(
             text='Pixel 11 Pro | 4K 60FPS',
-            size_hint=(1, 0.1)
-        )
-        self.add_widget(self.info)
-
-        self.cam = Camera(
-            play=True,
-            index=0
-        )
-        self.add_widget(self.cam)
-
-        row =
+           
